@@ -1,0 +1,12 @@
+﻿@model TeploobmenLibrary.TeploobmenInput
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<form action="/Registr" method="post">
+    Введите свой Email:
+    <input name="Email" value="" autocomplete="off" />
+    Введите пароль:
+    <input type="password" name="Password" value="" autocomplete="off" />
+    <button type="submit"> Зарегистрироваться</button>
+</form>

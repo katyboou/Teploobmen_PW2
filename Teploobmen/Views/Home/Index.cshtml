@@ -1,0 +1,81 @@
+﻿@model HomeIndexViewModel
+@{
+    ViewData["Title"] = "Расчёт";
+}
+@if (!string.IsNullOrEmpty(TempData["message"]?.ToString()))
+{
+    <div class="alert alert-danger">
+        @TempData["message"]
+    </div>
+}
+<form action="/Home/Result" method="post">
+    Номер варианта:
+    <input name="Name" value="@Model.Option?.Name" autocomplete="off" data-val="true" />
+    <p>
+        Высота слоя (м):
+        <input name="H" value="@Model.Option?.H" autocomplete="off" data-val="true" />
+        Начальная температура окатышей (градусы):
+        <input name="t1" value="@Model.Option?.t1" autocomplete="off" data-val="true" />
+        Начальная температура воздуха (градусы):
+        <input name="T" value="@Model.Option?.T" autocomplete="off" data-val="true" />
+    </p>
+    <p>
+        Скорость воздуха на свободное сечение шахты (м/с):
+        <input name="w" value="@Model.Option?.w" autocomplete="off" data-val="true" />
+        Средняя теплоёмкость воздуха при 200 градусах (кДж/(кг*К):
+        <input name="C" value="@Model.Option?.C" autocomplete="off" data-val="true" />
+    </p>
+    Расход окатышей:
+    <input name="Gm" value="@Model.Option?.Gm" autocomplete="off" data-val="true" />
+    Теплоёмкость окатышей:
+    <input name="Cm" value="@Model.Option?.Cm" autocomplete="off" data-val="true" />
+    <p><p>
+        Диаметр аппарата (м):
+        <input name="d" value="@Model.Option?.d" autocomplete="off" data-val="true" />
+        Объемный коэффициент теплоотдачи:
+        <input name="a" value="@Model.Option?.a" autocomplete="off" data-val="true" />
+    </p>
+    <p>
+        <button type="submit"> Рассчитать</button>
+    </p>
+</form>
+<h2>Варианты расчетов</h2>
+<table class="table table-bordered">
+    <tr>
+        <td>Название варианта</td>
+        <td>Высота слоя (м)</td>
+        <td>Начальная температура окатышей (градусы):</td>
+        <td>Начальная температура воздуха (градусы):</td>
+        <td>Скорость вохдуха на свободное сечение шахты (м/с)</td>
+        <td>Средняя теплоёмкость воздуха при 200 градусах (кДж/(кг*К)</td>
+        <td>Расход окатышей:</td>
+        <td>Теплоёмкость окатышей:</td>
+        <td>Диаметр аппарата (м):</td>
+        <td>Объемный коэффициент теплоотдачи:</td>
+        <td></td>
+    </tr>
+
+    @foreach (var Option in Model.Options)
+    {
+        <tr>
+            <td>@Option.Name</td>
+            <td>@Option.H</td>
+            <td>@Option.t1</td>
+            <td>@Option.T</td>
+            <td>@Option.w</td>
+            <td>@Option.C</td>
+            <td>@Option.Gm</td>
+            <td>@Option.Cm</td>
+            <td>@Option.d</td>
+            <td>@Option.a</td>
+            <td>
+                <a href="/Home/Index/?OptionId=@Option.Id">Открыть</a>
+                <a href="/Home/Remove/?OptionId=@Option.Id">Удалить</a>
+            </td>
+        </tr>
+
+    }
+</table>
+
+
+
